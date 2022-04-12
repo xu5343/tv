@@ -5,6 +5,7 @@
 "sites":[
 {"key":"csp_xpath_ctv","name":"冲TMTV","type":3,"api":"csp_XPathMacFilter","searchable":1,"quickSearch":1,"filterable": 1,"ext": "https://cdn.jsdelivr.net/gh/YuanHsing/OneClickRun@master/xpath/chongtmtv.json"},
 {"key":"酷猫影视","name":"酷猫影视","type":1,"api":"https://www.pgcms10.com/api.php/provide/vod/","playUrl":"","searchable":1,"quickSearch":1,"categories":[]}
+ {"key":"酷云影视","name":"酷云影视","type":1,"api":"http://api.kunyu77.com/api.php/provide","playUrl":"","searchable":1,"quickSearch":1,"categories":[]}
 ],
 "lives":[
 {"group":"redirect","channels":[
