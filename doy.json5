@@ -1,50 +1,113 @@
 {
   "$schema": "https://gkd.li/api/v2/schema",
-  "id": "douyin-kid-auto-next",
+  "id": 2026041502,
   "name": "抖音 - 小朋友智能自动刷视频",
-  "version": 2,
-  "author": "Grok(修正整理: ChatGPT)",
-  "description": "尽量在出现“重播/播放结束”等结束态控件时自动上滑到下一条；另带可选的定时兜底规则（默认关闭）。",
+  "version": 1,
+  "author": "Grok(修正: ChatGPT)",
+  "description": "出现“重播/播放结束”等结束态提示时自动上滑下一条；另带可选兜底定时上滑（默认关闭）。",
   "rules": [
     {
       "key": 1,
-      "name": "抖音短视频自动下一条",
+      "name": "抖音自动刷下一条（结束态触发）",
       "enable": true,
       "apps": ["com.ss.android.ugc.aweme"],
       "rules": [
         {
-          "key": 0,
-          "name": "检测结束态/重播 - 自动刷下一个",
+          "key": 10,
+          "name": "结束态-id: iv_replay",
           "enable": true,
           "activityIds": [
             "com.ss.android.ugc.aweme.main.MainActivity",
             "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
           ],
-          "matches": [
-            "[id='com.ss.android.ugc.aweme:id/iv_replay']",
-            "[id='com.ss.android.ugc.aweme:id/replay_container']",
-            "[id^='com.ss.android.ugc.aweme:id/replay']",
-            "[text*='重播']",
-            "[text*='再看一遍']",
-            "[text*='播放结束']",
-            "[text*='看完这个视频']"
-          ],
+          "matches": "[id='com.ss.android.ugc.aweme:id/iv_replay']",
           "action": "global:-1",
-          "interval": 800
+          "actionCd": 800
         },
         {
-          "key": 1,
-          "name": "兜底：每90秒刷一次（默认关闭，避免误划）",
+          "key": 11,
+          "name": "结束态-id: replay_container",
+          "enable": true,
+          "activityIds": [
+            "com.ss.android.ugc.aweme.main.MainActivity",
+            "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
+          ],
+          "matches": "[id='com.ss.android.ugc.aweme:id/replay_container']",
+          "action": "global:-1",
+          "actionCd": 800
+        },
+        {
+          "key": 12,
+          "name": "结束态-id前缀: replay*",
+          "enable": true,
+          "activityIds": [
+            "com.ss.android.ugc.aweme.main.MainActivity",
+            "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
+          ],
+          "matches": "[id^='com.ss.android.ugc.aweme:id/replay']",
+          "action": "global:-1",
+          "actionCd": 800
+        },
+        {
+          "key": 20,
+          "name": "结束态-文案: 重播",
+          "enable": true,
+          "activityIds": [
+            "com.ss.android.ugc.aweme.main.MainActivity",
+            "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
+          ],
+          "matches": "[text*='重播']",
+          "action": "global:-1",
+          "actionCd": 800
+        },
+        {
+          "key": 21,
+          "name": "结束态-文案: 再看一遍",
+          "enable": true,
+          "activityIds": [
+            "com.ss.android.ugc.aweme.main.MainActivity",
+            "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
+          ],
+          "matches": "[text*='再看一遍']",
+          "action": "global:-1",
+          "actionCd": 800
+        },
+        {
+          "key": 22,
+          "name": "结束态-文案: 播放结束",
+          "enable": true,
+          "activityIds": [
+            "com.ss.android.ugc.aweme.main.MainActivity",
+            "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
+          ],
+          "matches": "[text*='播放结束']",
+          "action": "global:-1",
+          "actionCd": 800
+        },
+        {
+          "key": 23,
+          "name": "结束态-文案: 看完这个视频",
+          "enable": true,
+          "activityIds": [
+            "com.ss.android.ugc.aweme.main.MainActivity",
+            "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
+          ],
+          "matches": "[text*='看完这个视频']",
+          "action": "global:-1",
+          "actionCd": 800
+        },
+
+        {
+          "key": 90,
+          "name": "兜底：每90秒上滑一次（默认关闭）",
           "enable": false,
           "activityIds": [
             "com.ss.android.ugc.aweme.main.MainActivity",
             "com.ss.android.ugc.aweme.detail.ui.DetailActivity"
           ],
-          "matches": [
-            "[class='android.widget.FrameLayout']"
-          ],
+          "matches": "[class='android.widget.FrameLayout']",
           "action": "global:-1",
-          "interval": 90000
+          "actionCd": 90000
         }
       ]
     }
